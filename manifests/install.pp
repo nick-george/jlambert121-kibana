@@ -50,13 +50,17 @@ class kibana::install (
       require     => User[$user],
       unless      => "test -e ${install_path}/${filename}/LICENSE.txt",
     }
+    file{'kibana':
+      path    => "${tmp_dir}/${filename}.tar.gz",
+      ensure  => present,
+    }
   }
   exec { 'extract_kibana':
     command => "tar -xzf ${tmp_dir}/${filename}.tar.gz -C ${install_path}",
     path    => ['/bin', '/sbin'],
     creates => "${install_path}/${filename}",
     notify  => Exec['ensure_correct_permissions'],
-    require => Wget::Fetch['kibana'],
+    require => File['kibana'],
   }
 
   exec { 'ensure_correct_permissions':
