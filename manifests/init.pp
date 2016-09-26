@@ -115,6 +115,7 @@ class kibana (
   $verify_ssl             = $::kibana::params::verify_ssl,
   $base_path              = $::kibana::params::base_path,
   $log_file               = $::kibana::params::log_file,
+  $install_from_file      = false
 ) inherits kibana::params {
 
   if !is_integer($port) {

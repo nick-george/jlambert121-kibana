@@ -10,6 +10,7 @@ class kibana::install (
   $install_path        = $::kibana::install_path,
   $group               = $::kibana::group,
   $user                = $::kibana::user,
+  $install_from_file   = $::kibana::install_from_file,
 ) {
 
   $filename = $::architecture ? {
@@ -33,13 +34,23 @@ class kibana::install (
     require => Group[$group],
   }
 
-  wget::fetch { 'kibana':
-    source      => "${base_url}/${filename}.tar.gz",
-    destination => "${tmp_dir}/${filename}.tar.gz",
-    require     => User[$user],
-    unless      => "test -e ${install_path}/${filename}/LICENSE.txt",
+  if $install_from_file == true {
+    file { 'kibana':
+      source      => "puppet:///${base_url}/${filename}.tar.gz",
+      path        => "${tmp_dir}/${filename}.tar.gz",
+      require     => User[$user],
+      owner       => "$user",
+      group       => "$group",
+      mode        => 644,
+    }
+  } else {
+    wget::fetch { 'kibana':
+      source      => "${base_url}/${filename}.tar.gz",
+      destination => "${tmp_dir}/${filename}.tar.gz",
+      require     => User[$user],
+      unless      => "test -e ${install_path}/${filename}/LICENSE.txt",
+    }
   }
-
   exec { 'extract_kibana':
     command => "tar -xzf ${tmp_dir}/${filename}.tar.gz -C ${install_path}",
     path    => ['/bin', '/sbin'],
