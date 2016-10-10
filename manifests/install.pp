@@ -61,6 +61,7 @@ class kibana::install (
     command     => "tar -xzf ${tmp_dir}/${filename}.tar.gz -C ${install_path}",
     path        => ['/bin', '/sbin'],
 #    creates => "${install_path}/${filename}",
+    onlyif      => "rm -rf ${install_path}/${filename}", #nickg added this to allow us to overwrite existing installs"
     notify      => Exec['ensure_correct_permissions'],
     require     => File['kibana'],
     refreshonly => true,
