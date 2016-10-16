@@ -30,7 +30,6 @@ class kibana::install (
   user { $user:
     ensure  => 'present',
     uid     => '1339',
-    gid     => '1339',
     system  => false,
     gid     => $group,
     home    => $install_path,
