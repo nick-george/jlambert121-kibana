@@ -23,12 +23,15 @@ class kibana::install (
 
   group { $group:
     ensure => 'present',
-    system => true,
+    system => false,
+    gid    => '1339',
   }
 
   user { $user:
     ensure  => 'present',
-    system  => true,
+    uid     => '1339',
+    gid     => '1339',
+    system  => false,
     gid     => $group,
     home    => $install_path,
     require => Group[$group],
