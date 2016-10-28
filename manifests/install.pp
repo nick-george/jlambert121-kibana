@@ -34,6 +34,7 @@ class kibana::install (
     gid     => $group,
     home    => $install_path,
     require => Group[$group],
+    shell   => '/sbin/nologin',
   }
 
   if $install_from_file == true {
