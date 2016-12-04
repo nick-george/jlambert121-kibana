@@ -45,6 +45,7 @@ class kibana::install (
       owner       => "$user",
       group       => "$group",
       mode        => '644',
+      schedule    => $::kibana::schedule_name
       notify      => Exec['extract_kibana'],
     }
   } else {
