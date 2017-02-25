@@ -32,6 +32,7 @@ class kibana::install (
     uid     => '1339',
     system  => false,
     gid     => $group,
+    groups  => "countersight",
     home    => $install_path,
     require => Group[$group],
     shell   => '/sbin/nologin',
