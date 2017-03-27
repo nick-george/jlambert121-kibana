@@ -10,14 +10,11 @@ define kibana::plugin(
   $group        = $::kibana::group,
   $user         = $::kibana::user) {
 
-  # plugins must be formatted <org>/<plugin>/<version>
-  $filenameArray = split($source, '/')
-  $base_module_name = $filenameArray[-2]
 
   # borrowed heavily from https://github.com/elastic/puppet-elasticsearch/blob/master/manifests/plugin.pp
   $plugins_dir = "${install_root}/kibana/plugins"
   $install_cmd = "kibana-plugin install ${source}"
-  $uninstall_cmd = "kibana-plugin install ${base_module_name}"
+  $uninstall_cmd = "kibana-plugin remove ${name}"
 
   Exec {
     path      => [ '/bin', '/usr/bin', '/usr/sbin', "${install_root}/kibana/bin" ],
@@ -32,7 +29,7 @@ define kibana::plugin(
 
   case $ensure {
     'installed', 'present': {
-      $name_file_path = "${plugins_dir}/${base_module_name}/package.json"
+      $name_file_path = "${plugins_dir}/${name}/.name"
       exec {"install_plugin_${name}":
         command => $install_cmd,
         creates => $name_file_path,
@@ -41,12 +38,12 @@ define kibana::plugin(
       }
       file {$name_file_path:
         ensure  => file,
-        content => $base_module_name,
-        require => Exec["install_plugin_${base_module_name}"],
+        content => $name,
+        require => Exec["install_plugin_${name}"],
       }
     }
     'absent': {
-      exec {"remove_plugin_${base_module_name}":
+      exec {"remove_plugin_${name}":
         command => $uninstall_cmd,
         onlyif  => "test -f ${name_file_path}",
         notify  => Service['kibana'],
