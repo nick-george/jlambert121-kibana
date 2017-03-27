@@ -15,9 +15,9 @@ define kibana::plugin(
   $base_module_name = $filenameArray[-2]
 
   # borrowed heavily from https://github.com/elastic/puppet-elasticsearch/blob/master/manifests/plugin.pp
-  $plugins_dir = "${install_root}/kibana/installedPlugins"
-  $install_cmd = "kibana plugin --install ${source}"
-  $uninstall_cmd = "kibana plugin --remove ${base_module_name}"
+  $plugins_dir = "${install_root}/kibana/plugins"
+  $install_cmd = "kibana-plugin install ${source}"
+  $uninstall_cmd = "kibana-plugin install ${base_module_name}"
 
   Exec {
     path      => [ '/bin', '/usr/bin', '/usr/sbin', "${install_root}/kibana/bin" ],
@@ -28,9 +28,11 @@ define kibana::plugin(
     timeout   => 600,
   }
 
+#TODO, deal with upgrades!
+
   case $ensure {
     'installed', 'present': {
-      $name_file_path = "${plugins_dir}/${base_module_name}/.name"
+      $name_file_path = "${plugins_dir}/${base_module_name}/package.json"
       exec {"install_plugin_${name}":
         command => $install_cmd,
         creates => $name_file_path,
