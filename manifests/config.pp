@@ -27,16 +27,9 @@ class kibana::config (
   $log_file               = $::kibana::log_file,
 ){
 
-  if versioncmp($version, '4.2.0') < 0 {
-    if $base_path {
-      fail('Kibana config: server.basePath is not supported for kibana 4.1 and lower')
-    }
-    $template = 'kibana-4.0-4.1.yml'
-  } else {
-    $template = 'kibana-4.2-4.4.yml'
-  }
+  $template = 'kibana-5.4.yml.erb'
 
-  file { "${install_path}/kibana/config/kibana.yml":
+  file { "/etc/kibana/kibana.yml":
     ensure  => 'file',
     owner   => 'kibana',
     group   => 'kibana',

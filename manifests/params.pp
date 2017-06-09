@@ -4,7 +4,7 @@
 #
 #
 class kibana::params {
-  $version                = '4.0.1'
+  $version                = '5.4.1'
   $base_url               = 'https://download.elasticsearch.org/kibana/kibana'
   $ca_cert                = undef
   $install_path           = '/opt'
@@ -17,7 +17,7 @@ class kibana::params {
   $elasticsearch_username = undef
   $elasticsearch_password = undef
   $default_app_id         = 'discover'
-  $request_timeout        = 300000
+  $request_timeout        = 30000
   $shard_timeout          = 0
   $ping_timeout           = 1500
   $startup_timeout        = 5000
