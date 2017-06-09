@@ -34,6 +34,6 @@ class kibana::config (
     owner   => 'kibana',
     group   => 'kibana',
     mode    => '0440',
-    content => template("kibana/${template}.erb"),
+    content => template("kibana/${template}"),
   }
 }
