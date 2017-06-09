@@ -34,7 +34,7 @@ define kibana::plugin(
         command => $install_cmd,
         creates => $name_file_path,
         notify  => Service['kibana'],
-        require => File[$plugins_dir],
+        require => Package['kibana'],
       }
       file {$name_file_path:
         ensure  => file,
