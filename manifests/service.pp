@@ -8,7 +8,7 @@ class kibana::service {
   service { 'kibana':
     ensure   => running,
     enable   => true,
-    require  => File['kibana-init-script'],
+    require  => Package['kibana'],
     provider => $::kibana::params::service_provider,
   }
 }
