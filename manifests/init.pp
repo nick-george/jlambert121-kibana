@@ -132,7 +132,7 @@ class kibana (
   validate_absolute_path($tmp_dir)
   validate_absolute_path($pid_file)
   validate_bool($es_preserve_host)
-  validate_bool($verify_ssl)
+  validate_string($verify_ssl)
 
   if ( $ssl_cert_file != undef) {
     validate_absolute_path($ssl_cert_file)
