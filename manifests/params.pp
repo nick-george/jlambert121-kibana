@@ -23,7 +23,7 @@ class kibana::params {
   $startup_timeout        = 5000
   $ssl_cert_file          = undef
   $ssl_key_file           = undef
-  $verify_ssl             = true
+  $verify_ssl             = 'full'
   $group                  = 'kibana'
   $user                   = 'kibana'
   $base_path              = undef
