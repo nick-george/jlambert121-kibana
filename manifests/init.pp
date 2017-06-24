@@ -116,7 +116,8 @@ class kibana (
   $base_path              = $::kibana::params::base_path,
   $log_file               = $::kibana::params::log_file,
   $schedule_name          = undef,
-  $install_from_file      = false
+  $install_from_file      = false,
+  $disabled_plugins       = undef,
 ) inherits kibana::params {
 
   if !is_integer($port) {

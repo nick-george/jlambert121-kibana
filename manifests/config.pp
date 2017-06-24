@@ -25,6 +25,7 @@ class kibana::config (
   $verify_ssl             = $::kibana::verify_ssl,
   $base_path              = $::kibana::base_path,
   $log_file               = $::kibana::log_file,
+  $disabled_plugins       = $::kibana::disabled_plugins,
 ){
 
   $template = 'kibana-5.4.yml.erb'
