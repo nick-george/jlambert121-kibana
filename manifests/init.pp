@@ -118,6 +118,7 @@ class kibana (
   $schedule_name          = undef,
   $install_from_file      = false,
   $disabled_plugins       = undef,
+  $package_name           = 'kibana',
 ) inherits kibana::params {
 
   if !is_integer($port) {
