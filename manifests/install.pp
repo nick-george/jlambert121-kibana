@@ -39,7 +39,8 @@ class kibana::install (
     shell   => '/sbin/nologin',
   }
 
-  package{"$package_name":
+  package{'kibana':
+    name    => "$package_name",
     ensure  => "$version"
   }
 
