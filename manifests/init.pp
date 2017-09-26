@@ -119,6 +119,7 @@ class kibana (
   $install_from_file      = false,
   $disabled_plugins       = undef,
   $package_name           = 'kibana',
+  $service_name           = 'kibana',
 ) inherits kibana::params {
 
   if !is_integer($port) {
