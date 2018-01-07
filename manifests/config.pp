@@ -26,6 +26,7 @@ class kibana::config (
   $base_path              = $::kibana::base_path,
   $log_file               = $::kibana::log_file,
   $extra_config           = $::kibana::extra_config,
+  $disabled_plugins       = $::kibana::disabled_plugins,
 ){
 
   if $extra_config {

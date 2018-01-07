@@ -117,7 +117,10 @@ class kibana (
   $log_file               = $::kibana::params::log_file,
   $extra_config           = undef,
   $schedule_name          = undef,
-  $install_from_file      = false
+  $install_from_file      = false,
+  $disabled_plugins       = undef,
+  $package_name           = 'kibana',
+  $service_name           = 'kibana',
 ) inherits kibana::params {
 
   if !is_integer($port) {

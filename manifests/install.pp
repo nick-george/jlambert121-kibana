@@ -11,6 +11,7 @@ class kibana::install (
   $group               = $::kibana::group,
   $user                = $::kibana::user,
   $install_from_file   = $::kibana::install_from_file,
+  $package_name        = $::kibana::package_name,
 ) {
 
   $filename = $::architecture ? {
@@ -39,6 +40,7 @@ class kibana::install (
   }
 
   package{'kibana':
+    name    => "$package_name",
     ensure  => "$version"
   }
 
