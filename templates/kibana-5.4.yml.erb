@@ -128,8 +128,9 @@ logging.dest: <%= @log_file %>
 # translations.
 #i18n.defaultLocale: "en"
 
+<!= The range below is to jump past the rediculous --- that the to_yaml function adds to the string !>
 <% if @extra_stuff -%>
-<%= @extra_stuff %>
+<%= @extra_stuff[4..-1] %>
 <% end -%>
 
 <% if @disabled_plugins -%>
