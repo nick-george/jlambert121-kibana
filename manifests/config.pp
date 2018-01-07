@@ -35,6 +35,7 @@ class kibana::config (
   else {
     $extra_stuff = undef
   }
+  notify{"Extra stuff is $extra_stuff":}
 
   $template = 'kibana-5.4.yml.erb'
 
