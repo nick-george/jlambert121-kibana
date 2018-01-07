@@ -127,3 +127,7 @@ logging.dest: <%= @log_file %>
 # The default locale. This locale can be used in certain circumstances to substitute any missing
 # translations.
 #i18n.defaultLocale: "en"
+
+<% if @extra_stuff -%>
+<%= @extra_stuff %>
+<% end -%>

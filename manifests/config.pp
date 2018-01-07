@@ -25,11 +25,19 @@ class kibana::config (
   $verify_ssl             = $::kibana::verify_ssl,
   $base_path              = $::kibana::base_path,
   $log_file               = $::kibana::log_file,
+  $extra_config           = $::kibana::extra_config,
 ){
+
+  if $extra_config {
+    $extra_stuff = to_yaml($extra_config)
+  }
+  else {
+    $extra_stuff = undef
+  }
 
   $template = 'kibana-5.4.yml.erb'
 
-  file { "/etc/kibana/kibana.yml":
+  file {'/etc/kibana/kibana.yml':
     ensure  => 'file',
     owner   => 'kibana',
     group   => 'kibana',
