@@ -27,6 +27,7 @@ class kibana::config (
   $log_file               = $::kibana::log_file,
   $extra_config           = $::kibana::extra_config,
   $disabled_plugins       = $::kibana::disabled_plugins,
+  $use_external_creds     = $::kibana::use_external_creds,
 ){
 
   if $extra_config {
@@ -35,15 +36,26 @@ class kibana::config (
   else {
     $extra_stuff = undef
   }
-  notify{"Extra stuff is $extra_stuff":}
 
   $template = 'kibana-5.4.yml.erb'
 
-  file {'/etc/kibana/kibana.yml':
-    ensure  => 'file',
+  conf = '/etc/kibana/kibana.yml'
+  concat { $conf:
     owner   => 'kibana',
     group   => 'kibana',
     mode    => '0440',
+
+  concat::fragment {'kibana_config':
+    target  => $conf,
     content => template("kibana/${template}"),
+    order   => '01',
+  }
+
+  if $use_external_creds {
+    concat::fragment {'kibana_creds':
+      target  => $conf,
+      source  => '/etc/kibana/creds.yaml'
+      order   => '02',
+    }
   }
 }
