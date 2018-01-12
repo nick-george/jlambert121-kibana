@@ -55,7 +55,7 @@ class kibana::config (
   if $use_external_creds {
     concat::fragment {'kibana_creds':
       target  => $conf,
-      source  => '/etc/kibana/creds.yaml'
+      source  => '/etc/kibana/creds.yaml',
       order   => '02',
     }
   }
