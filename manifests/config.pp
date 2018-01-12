@@ -44,6 +44,7 @@ class kibana::config (
     owner   => 'kibana',
     group   => 'kibana',
     mode    => '0440',
+  }
 
   concat::fragment {'kibana_config':
     target  => $conf,
