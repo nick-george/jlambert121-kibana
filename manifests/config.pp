@@ -39,7 +39,8 @@ class kibana::config (
 
   $template = 'kibana-5.4.yml.erb'
 
-  conf = '/etc/kibana/kibana.yml'
+  $conf = '/etc/kibana/kibana.yml'
+
   concat { $conf:
     owner   => 'kibana',
     group   => 'kibana',
