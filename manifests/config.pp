@@ -37,12 +37,20 @@ class kibana::config (
   }
 
   $template = 'kibana-5.4.yml.erb'
+  
+  file{'/etc/kibana':
+    ensure => 'directory',
+    owner   => 'kibana',
+    group   => 'kibana',
+    mode    => '0755',
+  }
 
   file {'/etc/kibana/kibana.yml':
     ensure  => 'file',
     owner   => 'kibana',
     group   => 'kibana',
-    mode    => '0440',
+    mode    => '0640',
     content => template("kibana/${template}"),
+    require => File['/etc/kibana'],
   }
 }
