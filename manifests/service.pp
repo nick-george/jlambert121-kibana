@@ -8,7 +8,7 @@ class kibana::service {
   service { 'kibana':
     name     => $::kibana::service_name,
     ensure   => running,
-    enable   => true,
+    enable   => manual,
     require  => Package['kibana'],
     provider => $::kibana::params::service_provider,
   }

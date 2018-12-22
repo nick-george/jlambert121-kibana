@@ -27,6 +27,7 @@ class kibana::config (
   $log_file               = $::kibana::log_file,
   $extra_config           = $::kibana::extra_config,
   $disabled_plugins       = $::kibana::disabled_plugins,
+  $use_external_creds     = $::kibana::use_external_creds,
 ){
 
   if $extra_config {
@@ -37,12 +38,19 @@ class kibana::config (
   }
 
   $template = 'kibana-5.4.yml.erb'
-
-  file {'/etc/kibana/kibana.yml':
-    ensure  => 'file',
+  
+  file{'/etc/kibana':
+    ensure => 'directory',
     owner   => 'kibana',
     group   => 'kibana',
-    mode    => '0440',
+    mode    => '0755',
+  }
+
+  file {'/etc/kibana/kibana.yml':
+    owner   => 'kibana',
+    group   => 'kibana',
+    mode    => '0640',
     content => template("kibana/${template}"),
+    require => File['/etc/kibana'],
   }
 }
