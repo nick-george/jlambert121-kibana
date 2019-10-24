@@ -77,8 +77,9 @@ class kibana::params {
     }
 
     'Amazon': {
-      $service_provider  = 'init'
-      $init_script_osdependend = 'kibana.legacy.service.redhat.erb'
+      $service_provider      = 'systemd'
+      $systemd_provider_path = '/usr/lib/systemd/system'
+      $run_path              = '/run/kibana'
     }
 
     default: {
