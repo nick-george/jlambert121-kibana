@@ -33,7 +33,7 @@ define kibana::plugin(
       exec {"install_plugin_${name}":
         command => $install_cmd,
         creates => $name_file_path,
-        notify  => Service['kibana'],
+        notify  => Class['::kibana::service'],
         require => Package['kibana'],
       }
       file {$name_file_path:
@@ -46,7 +46,7 @@ define kibana::plugin(
       exec {"remove_plugin_${name}":
         command => $uninstall_cmd,
         onlyif  => "test -f ${name_file_path}",
-        notify  => Service['kibana'],
+        notify  => Class['::kibana::service'],
       }
     }
     default: {

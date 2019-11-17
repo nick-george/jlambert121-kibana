@@ -10,14 +10,10 @@ class kibana::install (
   $install_path        = $::kibana::install_path,
   $group               = $::kibana::group,
   $user                = $::kibana::user,
-  $install_from_file   = $::kibana::install_from_file,
   $package_name        = $::kibana::package_name,
+  $package_provider    = $::kibana::package_provider,
 ) {
 
-  $filename = $::architecture ? {
-    /(i386|x86$)/    => "kibana-${version}-linux-x86",
-    /(amd64|x86_64)/ => "kibana-${version}-linux-x86_64",
-  }
 
   $service_provider = $::kibana::params::service_provider
   $run_path         = $::kibana::params::run_path
@@ -39,9 +35,10 @@ class kibana::install (
     shell   => '/sbin/nologin',
   }
 
-  package{'kibana':
-    name    => "$package_name",
-    ensure  => "$version"
+  if $package_provider == 'rpm' {
+    package{'kibana':
+      name    => "$package_name",
+      ensure  => "$version"
+    }
   }
-
 }

@@ -118,9 +118,9 @@ class kibana (
   $extra_config           = undef,
   $use_external_creds     = false,
   $schedule_name          = undef,
-  $install_from_file      = false,
   $disabled_plugins       = undef,
   $package_name           = 'kibana',
+  $package_provider       = 'rpm',
   $service_name           = 'kibana',
 ) inherits kibana::params {
 

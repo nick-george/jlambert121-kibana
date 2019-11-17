@@ -37,7 +37,12 @@ class kibana::config (
     $extra_stuff = undef
   }
 
-  $template = 'kibana-5.4.yml.erb'
+  if(versioncmp($version,'7.0') < 0){
+    $template = 'kibana-5.4.yml.erb'
+  } else {
+    $template = 'kibana-7x.yml.erb'
+  }
+   
   
   file{'/etc/kibana':
     ensure => 'directory',
