@@ -37,7 +37,7 @@ class kibana::config (
     $extra_stuff = undef
   }
 
-  if(versioncmp($version,'7.0') < 0){
+  if(versioncmp($version,'7.0') < 0 or $version == 'latest'){
     $template = 'kibana-5.4.yml.erb'
   } else {
     $template = 'kibana-7x.yml.erb'
