@@ -18,6 +18,7 @@ class kibana::service {
     docker::run { 'kibana':
       image            => "registry.countersight.co:5000/countersight_kibana:${::kibana::version}",
       ports            => ['443:5601'],
+      net              => ['countersight'],
       service_prefix   => '', #service name will end up being 'kibana'
       extra_parameters => [ '--restart=unless-stopped',
                             '--mount type=bind,source=/etc/countersight,destination=/etc/countersight,readonly',
