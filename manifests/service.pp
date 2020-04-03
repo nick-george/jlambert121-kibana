@@ -25,7 +25,6 @@ class kibana::service {
                             '--mount type=bind,source=/data/configs,destination=/data/configs',
                             '--mount type=bind,source=/etc/kibana,destination=/etc/kibana,readonly',
                             '--mount type=bind,source=/etc/kibana/kibana.yml,destination=/usr/share/kibana/config/kibana.yml,readonly', #TODO, remove this line? We're executing Kibana with the correct commandline switches now
-                            '--mount type=bind,source=/etc/countersight/kibana,destination=/usr/share/kibana/bin/kibana,readonly', #TODO, remove this line? We're executing Kibana with the correct commandline switches now
                             '--mount type=bind,source=/var/log/kibana,destination=/var/log/kibana',
                             '--mount type=bind,source=/var/run/kibana,destination=/var/run/kibana',
                             "--add-host ${::fqdn}:${facts['networking']['ip']}"]
