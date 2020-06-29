@@ -20,6 +20,7 @@ class kibana::service {
       ports            => ['443:5601'],
       net              => ['countersight'],
       service_prefix   => '', #service name will end up being 'kibana'
+      systemd_restart  => 'no',
       extra_parameters => [ '--restart=no',
                             '--mount type=bind,source=/etc/countersight,destination=/etc/countersight,readonly',
                             '--mount type=bind,source=/data/configs,destination=/data/configs',
