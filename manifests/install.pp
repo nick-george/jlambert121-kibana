@@ -41,4 +41,17 @@ class kibana::install (
       ensure  => "$version"
     }
   }
+
+  $tag_release = 'v' + $version
+
+  if $package_provider == 'git' {
+    vcsrepo { '/usr/share/kibana':
+      ensure   => latest,
+      provider => git,
+      source   => 'https://github.com/elastic/kibana.git',
+      revision => $tag_release,
+      owner    => $user,
+      group    => $group
+    }
+  }
 }

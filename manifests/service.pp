@@ -30,6 +30,24 @@ class kibana::service {
                             '--mount type=bind,source=/var/run/kibana,destination=/var/run/kibana',
                             "--add-host ${::fqdn}:${facts['networking']['ip']}"]
     }
+  } elsif $::kibana::package_provider == 'git' {
+
+    file{'/etc/systemd/system/kibana.service':
+      ensure => 'present',
+      content => template('kibana/kibana.service.erb'),
+      owner   => 'root',
+      group   => 'root', 
+      mode    => '0644',
+    }
+
+    service { 'kibana':
+      name     => $::kibana::service_name,
+      ensure   => undef, #We don't want to specify whether or not the service should be running"
+      enable   => false,
+      require  => Package['kibana'],
+      provider => $::kibana::params::service_provider,
+    }
+
   } else {
     fail("kibana package provider must be 'docker' or 'rpm'")
   }
