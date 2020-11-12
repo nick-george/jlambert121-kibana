@@ -42,7 +42,7 @@ class kibana::install (
     }
   }
 
-  $tag_release = 'v' + $version
+  $tag_release =  "v${version}"
 
   if $package_provider == 'git' {
     vcsrepo { '/usr/share/kibana':
