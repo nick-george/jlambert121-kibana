@@ -3,7 +3,9 @@
 # This class manages the kibana service
 #
 #
-class kibana::service {
+class kibana::service(
+  $install_path = $::kibana::install_path
+){
   if $::kibana::package_provider == 'rpm' {
     service { 'kibana':
       name     => $::kibana::service_name,
