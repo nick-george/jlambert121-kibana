@@ -18,7 +18,7 @@ class kibana::service(
   elsif $::kibana::package_provider == 'docker' {
   #docker run -it --name gerald --mount type=bind,source=/etc/countersight,destination=/etc/countersight,readonly --mount type=bind,source=/data/configs,destination=/data/configs --mount type=bind,source=/etc/kibana,destination=/etc/kibana,readonly --mount type=bind,source=/etc/kibana/kibana.yml,destination=/usr/share/kibana/config/kibana.yml,readonly -p 443:443 registry.countersight.co:5000/countersight_kibana:7.4.2-20191114008
     docker::run { 'kibana':
-      image            => "registry.countersight.co:5000/countersight_kibana:countersight-latest",
+      image            => "countersight_kibana:countersight-latest",
       ports            => ['443:5601'],
       net              => ['countersight'],
       service_prefix   => '', #service name will end up being 'kibana'
