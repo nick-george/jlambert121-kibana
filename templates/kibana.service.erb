@@ -12,7 +12,7 @@ Group=kibana
 # exist, it continues onward.
 EnvironmentFile=-/etc/default/kibana
 EnvironmentFile=-/etc/sysconfig/kibana
-ExecStart=<%= @install_path %>kibana/bin/kibana "-c /etc/kibana/kibana.yml"
+ExecStart=<%= @install_path %>/bin/kibana "-c /etc/kibana/kibana.yml"
 Restart=always
 WorkingDirectory=/
 
