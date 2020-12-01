@@ -47,7 +47,7 @@ class kibana::service(
       name     => $::kibana::service_name,
       ensure   => undef, #We don't want to specify whether or not the service should be running"
       enable   => false,
-      require  => Vcsrepo['/usr/share/kibana'],
+      require  => [File['/etc/systemd/system/kibana.service'],Vcsrepo['/usr/share/kibana']],
       provider => $::kibana::params::service_provider,
     }
 
