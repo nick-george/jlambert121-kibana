@@ -46,7 +46,7 @@ class kibana::install (
 
   if $package_provider == 'git' {
     vcsrepo { '/usr/share/kibana':
-      ensure   => latest,
+      ensure   => present,
       provider => git,
       source   => 'https://github.com/elastic/kibana.git',
 #      revision => $tag_release, #this was proving problematic as it was possibly trying to check out the wrong thing
