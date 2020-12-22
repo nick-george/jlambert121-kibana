@@ -49,7 +49,7 @@ class kibana::install (
       ensure   => latest,
       provider => git,
       source   => 'https://github.com/elastic/kibana.git',
-      revision => $tag_release,
+#      revision => $tag_release, #this was proving problematic as it was possibly trying to check out the wrong thing
       owner    => $user,
       group    => $group
     }
