@@ -14,7 +14,7 @@ EnvironmentFile=-/etc/default/kibana
 EnvironmentFile=-/etc/sysconfig/kibana
 ExecStart=<%= @install_path %>/bin/kibana "-c /etc/kibana/kibana.yml"
 Restart=always
-WorkingDirectory=/
+WorkingDirectory=/usr/share/kibana
 
 [Install]
 WantedBy=multi-user.target
