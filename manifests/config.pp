@@ -28,6 +28,8 @@ class kibana::config (
   $extra_config           = $::kibana::extra_config,
   $disabled_plugins       = $::kibana::disabled_plugins,
   $use_external_creds     = $::kibana::use_external_creds,
+  $kibana_start_script_args  = $::kibana::kibana_start_script_args,
+  $kibana_plugin_script_args = $::kibana::kibana_plugin_script_args,
 ){
 
   if $extra_config {
@@ -57,5 +59,21 @@ class kibana::config (
     mode    => '0640',
     content => template("kibana/${template}"),
     require => File['/etc/kibana'],
+  }
+
+  if $::kibana::package_provider == 'git' or $::kibana::package_provider == 'rpm' {
+    file {'/usr/share/kibana/bin/kibana':
+      owner   => 'kibana',
+      group   => 'kibana',
+      mode    => '0640',
+      content => template("kibana/scripts/kibana.erb"),
+    }
+
+    file {'/usr/share/kibana/bin/kibana-plugin':
+      owner   => 'kibana',
+      group   => 'kibana',
+      mode    => '0640',
+      content => template("kibana/scripts/kibana-plugin.erb"),
+    }
   }
 }

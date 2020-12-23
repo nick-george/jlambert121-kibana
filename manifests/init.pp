@@ -115,6 +115,9 @@ class kibana (
   $verify_ssl             = $::kibana::params::verify_ssl,
   $base_path              = $::kibana::params::base_path,
   $log_file               = $::kibana::params::log_file,
+  $kibana_start_script_args  = $::kibana::params::kibana_start_script_args,
+  $kibana_plugin_script_args = $::kibana::params::kibana_plugin_script_args,
+
   $extra_config           = undef,
   $use_external_creds     = false,
   $schedule_name          = undef,

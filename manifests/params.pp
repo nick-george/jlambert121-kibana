@@ -30,6 +30,10 @@ class kibana::params {
   $log_file               = '/var/log/kibana/kibana.log'
   $plugins                = undef
 
+  # These are the defaults for Kibana v7.4.2
+  $kibana_start_script_args = '"${NODE}" "${DIR}/src/cli" ${@} ${EXTRA_ARGS}'
+  $kibana_plugin_script_args = '"${NODE}" "${DIR}/src/cli_plugin" "$@"'
+
   case $::operatingsystem {
     'RedHat', 'CentOS', 'Fedora', 'Scientific', 'OracleLinux', 'SLC': {
 
