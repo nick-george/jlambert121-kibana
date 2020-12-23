@@ -65,14 +65,14 @@ class kibana::config (
     file {'/usr/share/kibana/bin/kibana':
       owner   => 'kibana',
       group   => 'kibana',
-      mode    => '0640',
+      mode    => '0755',
       content => template("kibana/scripts/kibana.erb"),
     }
 
     file {'/usr/share/kibana/bin/kibana-plugin':
       owner   => 'kibana',
       group   => 'kibana',
-      mode    => '0640',
+      mode    => '0755',
       content => template("kibana/scripts/kibana-plugin.erb"),
     }
   }
