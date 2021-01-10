@@ -44,13 +44,12 @@ class kibana::config (
   } else {
     $template = 'kibana-7x.yml.erb'
   }
-   
-  
+
   file{'/etc/kibana':
     ensure => 'directory',
-    owner   => 'kibana',
-    group   => 'kibana',
-    mode    => '0755',
+    owner  => 'kibana',
+    group  => 'kibana',
+    mode   => '0755',
   }
 
   file {'/etc/kibana/kibana.yml':
@@ -62,6 +61,20 @@ class kibana::config (
   }
 
   if $::kibana::package_provider == 'git' or $::kibana::package_provider == 'rpm' {
+    file {'/etc/sysconfig/kibana':
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+    }
+ 
+    file_line{'kibana-extra-args':
+      ensure => present,
+      path   => '/etc/sysconfig/kibana',
+      line   => 'EXTRA_ARGS="-c /etc/kibana/creds.yaml"',
+      match  => 'EXTRA_ARGS=',
+    }
+
     file {'/usr/share/kibana/bin/kibana':
       owner   => 'kibana',
       group   => 'kibana',
