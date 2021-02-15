@@ -26,7 +26,6 @@ class kibana::service(
       pull_on_start    => false,
       extra_parameters => [ '--restart=no',
                             '--mount type=bind,source=/etc/countersight,destination=/etc/countersight,readonly',
-                            '--mount type=bind,source=/data/configs,destination=/data/configs',
                             '--mount type=bind,source=/etc/kibana,destination=/etc/kibana,readonly',
                             '--mount type=bind,source=/etc/kibana/kibana.yml,destination=/usr/share/kibana/config/kibana.yml,readonly', #TODO, remove this line? We're executing Kibana with the correct commandline switches now
                             '--mount type=bind,source=/var/log/kibana,destination=/var/log/kibana',
